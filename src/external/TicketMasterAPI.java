@@ -53,7 +53,7 @@ public class TicketMasterAPI implements ExternalAPI {
 			JSONObject responseJson = new JSONObject(response.toString());
 			JSONObject embedded = (JSONObject) responseJson.get("_embedded");
 			JSONArray events = (JSONArray) embedded.get("events");
-		    return getItemList(events);
+		    return this.getItemList(events);
 			//return events;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -177,7 +177,7 @@ public class TicketMasterAPI implements ExternalAPI {
 
 	private Set<String> getCategories(JSONObject event) throws JSONException {
 		Set<String> categories = new HashSet<>();
-		JSONArray classifications = (JSONArray) event.get("classifications");
+		JSONArray classifications = event.getJSONArray("classifications");
 		for (int j = 0; j < classifications.length(); j++) {
 			JSONObject classification = classifications.getJSONObject(j);
 			JSONObject segment = classification.getJSONObject("segment");

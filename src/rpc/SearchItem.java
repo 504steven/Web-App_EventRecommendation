@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -97,10 +98,20 @@ public class SearchItem extends HttpServlet {
 		String userid = request.getParameter("user_id");
 		String term = request.getParameter("term");
 		//ExternalAPI externalApi = ExternalAPIFactory.getExternalAPI();
-		List<Item> itemlist = conn.search(userid, lat, lon, term);
+		List<Item> itemlist = conn.searchItems(userid, lat, lon, term);
 		List<JSONObject> itemjsonlist = new ArrayList<>();
+		Set<String> favEventSet = conn.getFavoriteItemIds(userid);
+		JSONObject itemJObject = null;
 		for(Item item : itemlist) {
-			itemjsonlist.add(item.toJSONObject());
+			itemJObject = item.toJSONObject();
+			try {
+				itemJObject.put("favorite", favEventSet.contains(item.getItemId() ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// System.out.println("searchresult:" + itemJObject);
+			itemjsonlist.add(itemJObject);
 		}
 		JSONArray itemjsonarr = new JSONArray(itemjsonlist);
 		RpcHelper.writeJsonArray(response, itemjsonarr);
@@ -113,8 +124,8 @@ public class SearchItem extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// System.out.println( RpcHelper.readJsonObject(request) );
 		doGet(request, response);
-	}
+	} 
 
 }

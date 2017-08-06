@@ -15,14 +15,15 @@ public interface DBConnection {
 	
 	public void unsetFavoriteItems(String userid, List<String> itemidlist);
 	
-	public Set<String> getFavoriteItemIDs(String userid);
+	public Set<String> getFavoriteItemIds(String userid);
 	
 	public Set<Item> getFavoriteItems(String userid);
 	
 	public Set<String> getCategories(String itemid);
 	
-	public List<Item> search(String userid, double lat, double lon, String term);
+	//public List<Item> search(String userid, double lat, double lon, String term);
 	
+	public List<Item> searchItems(String userId, double lat, double lon, String term);
 	/**
 	 * 
 	 * @param item

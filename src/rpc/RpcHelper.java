@@ -15,7 +15,7 @@ import org.json.JSONObject;
  * A helper class to handle rpc related parsing logics.
  */
 public class RpcHelper {
-	// Parses a JSONObject from http request.
+	// Parses a JSONObject from http request's body
 	public static JSONObject readJsonObject(HttpServletRequest request) {
 		StringBuffer jb = new StringBuffer();
 		String line = null;
