@@ -104,10 +104,10 @@ public class SearchItem extends HttpServlet {
 		JSONObject itemJObject = null;
 		for(Item item : itemlist) {
 			itemJObject = item.toJSONObject();
+			System.out.println("search result:" + itemJObject);
 			try {
 				itemJObject.put("favorite", favEventSet.contains(item.getItemId() ) );
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// System.out.println("searchresult:" + itemJObject);

@@ -69,7 +69,7 @@
 		showElement(logoutBtn, 'inline-block');
 		hideElement(loginForm);
 
-		// initGeoLocation();
+	    initGeoLocation();
 	}
 
 	function onSessionInvalid() {
